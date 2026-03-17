@@ -1,16 +1,36 @@
-## Hi there 👋
+# 👋 Hi, I'm Heranto (TiahM)
 
-<!--
-**TiahMHeranto/TiahMHeranto** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+🎯 Building at the intersection of **Technology, Finance, and Systems Thinking**
 
-Here are some ideas to get you started:
+---
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## 🚀 About Me
+
+- 🎓 Master’s student in **IoT & Cybersecurity**
+- 💻 Background in **Network & Systems Administration**
+- ⚙️ Freelance **Fullstack Developer**
+- 📊 Strong interest in **Finance, Trading & Business**
+- 🧠 Currently focused on **building, learning, and sharing publicly**
+
+I used to build quietly.  
+Now I’m building **in public**.
+
+---
+
+## 🔥 Current Focus
+
+- 🚀 Growing my personal brand (Facebook + LinkedIn)
+- 🧑‍💻 Building impactful projects with real-world value
+- 📈 Learning finance (long-term: CFA, CMA)
+- 🏗️ Developing my company **TiahM**
+
+---
+
+## 💼 Tech Stack
+
+```txt
+Backend:     Node.js, FastAPI
+Frontend:    React, Next.js
+Languages:   JavaScript, TypeScript, Python
+Systems:     Linux, windows
+Tools:       Git, GitHub, Docker
