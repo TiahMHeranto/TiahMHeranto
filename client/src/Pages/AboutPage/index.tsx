@@ -1,8 +1,8 @@
+import About from "../../components/About"
+
 const AboutPage = () => {
     return (
-        <div>
-            <label htmlFor=""> About Page</label>
-        </div>
+        <About />
     )
 }
 
