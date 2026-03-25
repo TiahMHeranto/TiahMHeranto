@@ -1,5 +1,8 @@
 const AboutPage = () => {
     return (
+        <div>
+            <label htmlFor=""> About Page</label>
+        </div>
     )
 }
 
