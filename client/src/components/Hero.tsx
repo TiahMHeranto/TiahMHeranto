@@ -19,7 +19,7 @@ const Hero: React.FC = () => {
           <div className="lg:w-2/3">
             <div className="inline-flex items-center space-x-2 bg-primary-600/10 text-primary-600 dark:text-primary-400 px-3 py-1 rounded-full mb-6">
               <span className="text-xl">👋</span>
-              <span className="font-medium">Hi, I'm Heranto (TiahM)</span>
+              <span className="font-medium">Hi, I'm Tiaheranto Mandaniaina (TiahMHeranto)</span>
             </div>
             
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
