@@ -19,9 +19,9 @@ const Quote: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <div className="text-6xl mb-6">"</div>
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6 leading-relaxed">
-          I used to build quietly. Now I'm building in public — merging cybersecurity with financial intelligence to create systems that are both secure and strategic.
+          Once, I nearly got fucking everything. But nearly doesn't count.
         </h2>
-        <p className="text-white/80 text-lg">- Heranto (TiahM)</p>
+        <p className="text-white/80 text-lg">- Tommy Shelby</p>
       </div>
     </section>
   );
