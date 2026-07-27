@@ -1,10 +1,10 @@
 function DailyAssistant() {
   return (
     <div>
-      <h2 className="mb-2 text-2xl font-semibold text-white">
+      <h2 className="mb-2 text-xl font-semibold text-[var(--fg-strong)] sm:text-2xl">
         Daily Assistant
       </h2>
-      <p className="text-white/40">Content coming soon.</p>
+      <p className="text-[var(--fg-subtle)]">Content coming soon.</p>
     </div>
   )
 }

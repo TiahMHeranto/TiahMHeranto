@@ -2,24 +2,74 @@
 
 @theme {
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --color-hud-black: #050505;
-  --color-hud-panel: #0a0a0a;
 }
 
 :root {
   color-scheme: dark;
+
+  --bg: #050505;
+  --fg: #e5e5e5;
+  --fg-strong: #ffffff;
+  --fg-dim: rgba(255, 255, 255, 0.7);
+  --fg-subtle: rgba(255, 255, 255, 0.4);
+  --fg-muted: rgba(255, 255, 255, 0.5);
+  --fg-faint: rgba(255, 255, 255, 0.2);
+
+  --panel-bg: rgba(0, 0, 0, 0.9);
+  --panel-border: rgba(255, 255, 255, 0.15);
+  --panel-shadow: rgba(0, 0, 0, 0.6);
+
+  --content-bg: rgba(255, 255, 255, 0.02);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --border-hover: rgba(255, 255, 255, 0.5);
+
+  --btn-bg: rgba(255, 255, 255, 0.05);
+  --grid-line: rgba(255, 255, 255, 0.035);
+  --scanline: rgba(255, 255, 255, 0.05);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #f2f2f2;
+  --fg: #1c1c1c;
+  --fg-strong: #000000;
+  --fg-dim: rgba(0, 0, 0, 0.7);
+  --fg-subtle: rgba(0, 0, 0, 0.45);
+  --fg-muted: rgba(0, 0, 0, 0.55);
+  --fg-faint: rgba(0, 0, 0, 0.25);
+
+  --panel-bg: rgba(255, 255, 255, 0.92);
+  --panel-border: rgba(0, 0, 0, 0.15);
+  --panel-shadow: rgba(0, 0, 0, 0.15);
+
+  --content-bg: rgba(0, 0, 0, 0.02);
+  --border: rgba(0, 0, 0, 0.1);
+  --border-strong: rgba(0, 0, 0, 0.2);
+  --border-hover: rgba(0, 0, 0, 0.5);
+
+  --btn-bg: rgba(0, 0, 0, 0.04);
+  --grid-line: rgba(0, 0, 0, 0.05);
+  --scanline: rgba(0, 0, 0, 0.05);
 }
 
 body {
   margin: 0;
   min-height: 100svh;
-  background-color: #050505;
+  background-color: var(--bg);
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 40px 40px;
-  color: #e5e5e5;
+  color: var(--fg);
   font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+}
+
+body,
+.scanlines,
+button {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .scanlines {
@@ -34,8 +84,8 @@ body {
   border-radius: inherit;
   background-image: repeating-linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0.05) 0px,
-    rgba(255, 255, 255, 0.05) 1px,
+    var(--scanline) 0px,
+    var(--scanline) 1px,
     transparent 1px,
     transparent 3px
   );
