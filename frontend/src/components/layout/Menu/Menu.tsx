@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
@@ -16,8 +16,33 @@ const MENU_ITEMS: MenuItemConfig[] = [
   { key: 'add-new', label: 'Add New' },
 ]
 
-const ITEM_WIDTH = 208
-const VIEWPORT_WIDTH = 460
+interface CarouselSize {
+  itemWidth: number
+  viewportWidth: number
+}
+
+const SIZE_BREAKPOINTS: { minWidth: number; size: CarouselSize }[] = [
+  { minWidth: 768, size: { itemWidth: 208, viewportWidth: 460 } },
+  { minWidth: 640, size: { itemWidth: 176, viewportWidth: 340 } },
+  { minWidth: 400, size: { itemWidth: 140, viewportWidth: 232 } },
+  { minWidth: 0, size: { itemWidth: 116, viewportWidth: 188 } },
+]
+
+function getCarouselSize(width: number): CarouselSize {
+  return SIZE_BREAKPOINTS.find((bp) => width >= bp.minWidth)!.size
+}
+
+function useCarouselSize() {
+  const [size, setSize] = useState(() => getCarouselSize(window.innerWidth))
+
+  useEffect(() => {
+    const onResize = () => setSize(getCarouselSize(window.innerWidth))
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
+  return size
+}
 
 interface MenuProps {
   currentPage: PageKey
@@ -25,12 +50,14 @@ interface MenuProps {
 }
 
 function Menu({ currentPage, onPageChange }: MenuProps) {
+  const { itemWidth, viewportWidth } = useCarouselSize()
+
   const activeIndex = useMemo(
     () => MENU_ITEMS.findIndex((item) => item.key === currentPage),
     [currentPage],
   )
 
-  const trackX = VIEWPORT_WIDTH / 2 - ITEM_WIDTH / 2 - activeIndex * ITEM_WIDTH
+  const trackX = viewportWidth / 2 - itemWidth / 2 - activeIndex * itemWidth
 
   const goTo = (direction: 1 | -1) => {
     const nextIndex =
@@ -39,8 +66,8 @@ function Menu({ currentPage, onPageChange }: MenuProps) {
   }
 
   return (
-    <header className="fixed inset-x-0 top-0 z-20 flex flex-col items-center pt-6">
-      <div className="mb-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.35em] text-white/40">
+    <header className="flex flex-col items-center px-2 pt-3 sm:pt-4 md:pt-6">
+      <div className="mb-2 flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.18em] text-white/40 sm:mb-3 sm:gap-2 sm:text-[10px] sm:tracking-[0.28em] md:mb-4 md:text-[11px] md:tracking-[0.35em]">
         <span className="text-white/70">TiahM Heranto</span>
         <motion.span
           animate={{ opacity: [1, 0, 1] }}
@@ -48,15 +75,15 @@ function Menu({ currentPage, onPageChange }: MenuProps) {
         >
           _
         </motion.span>
-        <span>SYSTEM LAUNCHER</span>
+        <span className="hidden sm:inline">SYSTEM LAUNCHER</span>
       </div>
 
-      <div className="scanlines flex items-center gap-3 overflow-hidden rounded-md border border-white/15 bg-black/90 px-3 py-4 shadow-[0_0_25px_rgba(0,0,0,0.6)]">
+      <div className="scanlines flex items-center gap-1.5 overflow-hidden rounded-md border border-white/15 bg-black/90 px-1.5 py-2 shadow-[0_0_25px_rgba(0,0,0,0.6)] sm:gap-3 sm:px-3 sm:py-4">
         <ArrowButton direction="left" onClick={() => goTo(-1)} />
 
         <div
-          className="relative flex h-16 items-center overflow-hidden"
-          style={{ width: VIEWPORT_WIDTH }}
+          className="relative flex h-11 items-center overflow-hidden sm:h-14 md:h-16"
+          style={{ width: viewportWidth }}
         >
           <motion.div
             className="flex items-center"
@@ -71,7 +98,7 @@ function Menu({ currentPage, onPageChange }: MenuProps) {
               return (
                 <div
                   key={item.key}
-                  style={{ width: ITEM_WIDTH }}
+                  style={{ width: itemWidth }}
                   className="flex flex-shrink-0 items-center justify-center"
                 >
                   <button
@@ -90,8 +117,8 @@ function Menu({ currentPage, onPageChange }: MenuProps) {
                       transition={{ type: 'spring', stiffness: 300, damping: 22 }}
                       className={`whitespace-nowrap font-mono uppercase tracking-widest ${
                         isActive
-                          ? 'text-lg font-bold text-white'
-                          : 'text-sm font-medium text-white/50'
+                          ? 'text-xs font-bold text-white sm:text-base md:text-lg'
+                          : 'text-[10px] font-medium text-white/50 sm:text-xs md:text-sm'
                       }`}
                     >
                       {item.label}
@@ -108,7 +135,7 @@ function Menu({ currentPage, onPageChange }: MenuProps) {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -4 }}
                           transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-                          className="mt-1 font-mono text-white/70"
+                          className="mt-1 font-mono text-xs text-white/70"
                         >
                           ^
                         </motion.span>
@@ -141,10 +168,10 @@ function ArrowButton({ direction, onClick }: ArrowButtonProps) {
       onClick={onClick}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded border border-white/20 bg-white/5 text-white/50 transition-colors hover:border-white/50 hover:text-white"
+      className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded border border-white/20 bg-white/5 text-white/50 transition-colors hover:border-white/50 hover:text-white sm:h-8 sm:w-8 md:h-9 md:w-9"
       aria-label={direction === 'left' ? 'Previous section' : 'Next section'}
     >
-      <Icon className="h-4 w-4" />
+      <Icon className="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4" />
     </motion.button>
   )
 }
