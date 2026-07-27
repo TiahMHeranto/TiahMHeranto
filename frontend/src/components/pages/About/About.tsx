@@ -14,7 +14,7 @@ import {
   FiWifi,
 } from 'react-icons/fi'
 import rawProfileMarkdown from '../../../../../TiahMHeranto.md?raw'
-import { normalizeMarkdown, extractSection } from '../../../utils/markdown'
+import { normalizeMarkdown, extractSection, splitSections } from '../../../utils/markdown'
 
 const profileMarkdown = normalizeMarkdown(rawProfileMarkdown)
 
@@ -209,6 +209,11 @@ const profileStats = computeProfileStats(profileMarkdown)
 const personalInfo = parsePersonalInfo(personalInfoBody)
 const cardholderName = getFieldValue(personalInfo, 'Full Name')
 const idNumber = generateIdNumber(cardholderName || pageTitle)
+
+const sections = splitSections(bodyMarkdown, /^## /).map((section) => ({
+  ...section,
+  title: section.title.replace(EMOJI_PREFIX_RE, ''),
+}))
 
 const EXPERTISE_ICONS = [FiCpu, FiShield, FiWifi]
 
@@ -460,7 +465,7 @@ const components: Components = {
     </h2>
   ),
   h3: ({ children }) => (
-    <h3 className="mt-4 font-mono text-sm font-semibold text-[var(--fg)] sm:text-base">
+    <h3 className="mt-5 border-t border-[var(--border)] pt-4 font-mono text-sm font-semibold text-[var(--fg)] first:mt-0 first:border-t-0 first:pt-0 sm:text-base">
       {children}
     </h3>
   ),
@@ -530,6 +535,86 @@ const components: Components = {
   pre: ({ children }) => <>{children}</>,
 }
 
+const chipComponents: Components = {
+  ...components,
+  ul: ({ children }) => <ul className="mb-2 flex flex-wrap gap-2">{children}</ul>,
+  li: ({ children }) => (
+    <li className="rounded border border-[var(--border)] px-2.5 py-1 font-mono text-xs text-[var(--fg-dim)]">
+      {children}
+    </li>
+  ),
+}
+
+function KeywordChips({ body }: { body: string }) {
+  const tags = body.match(/#[A-Za-z0-9]+/g) ?? []
+  if (tags.length === 0) return null
+
+  return (
+    <div className="flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <span
+          key={tag}
+          className="rounded border border-[var(--border)] px-2.5 py-1 font-mono text-xs text-[var(--fg-dim)]"
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+  )
+}
+
+type BoardVariant = 'default' | 'chips' | 'keywords'
+
+function getBoardVariant(title: string): BoardVariant {
+  if (/technical competencies/i.test(title)) return 'chips'
+  if (/professional keywords/i.test(title)) return 'keywords'
+  return 'default'
+}
+
+function BoardDots() {
+  return (
+    <div className="flex items-center gap-1.5">
+      <span className="h-1.5 w-1.5 rounded-full border border-[var(--border-strong)]" />
+      <span className="h-1.5 w-1.5 rounded-full border border-[var(--border-strong)]" />
+      <span className="h-1.5 w-1.5 rounded-full border border-[var(--border-strong)]" />
+    </div>
+  )
+}
+
+interface BoardProps {
+  title: string
+  body: string
+}
+
+function Board({ title, body }: BoardProps) {
+  const variant = getBoardVariant(title)
+
+  return (
+    <section className="mb-6 overflow-hidden rounded-md border border-[var(--border)] bg-[var(--content-bg)]">
+      <header className="flex items-center justify-between gap-3 border-b border-[var(--border)] bg-[var(--panel-bg)] px-4 py-2.5 sm:px-5">
+        <div className="flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--fg-strong)] sm:text-xs">
+          <span className="text-[var(--fg-faint)]">//</span>
+          {title}
+        </div>
+        <BoardDots />
+      </header>
+
+      <div className="px-4 py-4 sm:px-5 sm:py-5">
+        {variant === 'keywords' ? (
+          <KeywordChips body={body} />
+        ) : (
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={variant === 'chips' ? chipComponents : components}
+          >
+            {body}
+          </ReactMarkdown>
+        )}
+      </div>
+    </section>
+  )
+}
+
 function About() {
   return (
     <article>
@@ -541,9 +626,9 @@ function About() {
       <Hero />
       <IdentityCard />
       <AreaCards />
-      <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
-        {bodyMarkdown}
-      </ReactMarkdown>
+      {sections.map((section) => (
+        <Board key={section.title} title={section.title} body={section.body} />
+      ))}
     </article>
   )
 }

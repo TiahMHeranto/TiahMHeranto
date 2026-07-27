@@ -26,3 +26,24 @@ export function extractSection(source: string, headingRe: RegExp): SectionSplit 
     rest: [...lines.slice(0, startIndex), ...lines.slice(endIndex)].join('\n'),
   }
 }
+
+export interface MarkdownSection {
+  title: string
+  body: string
+}
+
+/** Splits `source` into one section per heading line matching `headingRe`, each running until the next match. */
+export function splitSections(source: string, headingRe: RegExp): MarkdownSection[] {
+  const lines = source.split('\n')
+  const headings = lines
+    .map((line, index) => ({ index, line }))
+    .filter(({ line }) => headingRe.test(line))
+
+  return headings.map(({ index, line }, i) => {
+    const bodyEnd = i + 1 < headings.length ? headings[i + 1].index : lines.length
+    return {
+      title: line.replace(/^#+\s*/, '').trim(),
+      body: lines.slice(index + 1, bodyEnd).join('\n'),
+    }
+  })
+}
