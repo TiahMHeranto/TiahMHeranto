@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
@@ -46,11 +46,12 @@ function useCarouselSize() {
 
 interface MenuProps {
   currentPage: PageKey
-  onPageChange: (page: PageKey) => void
+  onPageChange: (page: PageKey, origin?: DOMRect) => void
 }
 
 function Menu({ currentPage, onPageChange }: MenuProps) {
   const { itemWidth, viewportWidth } = useCarouselSize()
+  const buttonRefs = useRef<Partial<Record<PageKey, HTMLButtonElement>>>({})
 
   const activeIndex = useMemo(
     () => MENU_ITEMS.findIndex((item) => item.key === currentPage),
@@ -59,10 +60,15 @@ function Menu({ currentPage, onPageChange }: MenuProps) {
 
   const trackX = viewportWidth / 2 - itemWidth / 2 - activeIndex * itemWidth
 
+  const selectPage = (key: PageKey) => {
+    const origin = buttonRefs.current[key]?.getBoundingClientRect()
+    onPageChange(key, origin)
+  }
+
   const goTo = (direction: 1 | -1) => {
     const nextIndex =
       (activeIndex + direction + MENU_ITEMS.length) % MENU_ITEMS.length
-    onPageChange(MENU_ITEMS[nextIndex].key)
+    selectPage(MENU_ITEMS[nextIndex].key)
   }
 
   return (
@@ -103,7 +109,10 @@ function Menu({ currentPage, onPageChange }: MenuProps) {
                 >
                   <button
                     type="button"
-                    onClick={() => onPageChange(item.key)}
+                    ref={(el) => {
+                      buttonRefs.current[item.key] = el ?? undefined
+                    }}
+                    onClick={() => selectPage(item.key)}
                     className="group relative flex flex-col items-center focus:outline-none"
                   >
                     <motion.span

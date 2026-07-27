@@ -3,8 +3,9 @@ import ReactMarkdown, { type Components } from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { FiCpu, FiShield, FiWifi } from 'react-icons/fi'
 import rawProfileMarkdown from '../../../../../TiahMHeranto.md?raw'
+import { normalizeMarkdown, extractSection } from '../../../utils/markdown'
 
-const profileMarkdown = rawProfileMarkdown.replace(/\r\n/g, '\n')
+const profileMarkdown = normalizeMarkdown(rawProfileMarkdown)
 
 const VARIATION_SELECTOR_16 = String.fromCharCode(0xfe0f)
 const ZERO_WIDTH_JOINER = String.fromCharCode(0x200d)
@@ -82,30 +83,6 @@ function Timeline({ entries }: { entries: TimelineEntry[] }) {
       ))}
     </ol>
   )
-}
-
-interface SectionSplit {
-  body: string
-  rest: string
-}
-
-function extractSection(source: string, headingRe: RegExp): SectionSplit {
-  const lines = source.split('\n')
-  const startIndex = lines.findIndex((line) => headingRe.test(line))
-  if (startIndex === -1) return { body: '', rest: source }
-
-  let endIndex = lines.length
-  for (let i = startIndex + 1; i < lines.length; i++) {
-    if (/^## /.test(lines[i])) {
-      endIndex = i
-      break
-    }
-  }
-
-  return {
-    body: lines.slice(startIndex + 1, endIndex).join('\n'),
-    rest: [...lines.slice(0, startIndex), ...lines.slice(endIndex)].join('\n'),
-  }
 }
 
 function extractBlockquote(source: string): string {
