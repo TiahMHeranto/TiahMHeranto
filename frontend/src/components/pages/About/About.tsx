@@ -1,7 +1,18 @@
 import type { ReactNode } from 'react'
+import type { MouseEvent } from 'react'
 import ReactMarkdown, { type Components } from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { FiCpu, FiShield, FiWifi } from 'react-icons/fi'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import {
+  FiCheckCircle,
+  FiCpu,
+  FiCreditCard,
+  FiMail,
+  FiMapPin,
+  FiPhone,
+  FiShield,
+  FiWifi,
+} from 'react-icons/fi'
 import rawProfileMarkdown from '../../../../../TiahMHeranto.md?raw'
 import { normalizeMarkdown, extractSection } from '../../../utils/markdown'
 
@@ -114,6 +125,36 @@ function parseExpertiseAreas(body: string): ExpertiseArea[] {
   return areas
 }
 
+interface PersonalInfoField {
+  label: string
+  value: string
+}
+
+function parsePersonalInfo(body: string): PersonalInfoField[] {
+  const fields: PersonalInfoField[] = []
+
+  for (const rawLine of body.split('\n')) {
+    const match = rawLine.match(/^- \*\*(.+?):\*\*\s*(.+)$/)
+    if (match) {
+      fields.push({ label: match[1].trim(), value: match[2].trim() })
+    }
+  }
+
+  return fields
+}
+
+function getFieldValue(fields: PersonalInfoField[], label: string): string {
+  return fields.find((field) => field.label.toLowerCase() === label.toLowerCase())?.value ?? ''
+}
+
+function generateIdNumber(seed: string): string {
+  let hash = 0
+  for (let i = 0; i < seed.length; i++) {
+    hash = (hash * 31 + seed.charCodeAt(i)) >>> 0
+  }
+  return `TMH-${(hash % 9000) + 1000}`
+}
+
 interface ProfileStat {
   label: string
   value: string
@@ -137,7 +178,7 @@ function computeProfileStats(source: string): ProfileStat[] {
   const yearsActive = Math.max(1, new Date().getFullYear() - firstYear)
 
   return [
-    { label: 'Years Active', value: `${yearsActive}+` },
+    { label: 'Years Active', value: `${yearsActive - 2}+` },
     { label: 'Technical Skills', value: `${skillCount}` },
     { label: 'Professional Roles', value: `${roleCount}` },
     { label: 'Awards Earned', value: `${awardCount}` },
@@ -152,15 +193,22 @@ const { body: expertiseBody, rest: withoutExpertise } = extractSection(
   withoutPhilosophy,
   /^## .*Areas of Interest.*$/i,
 )
+const { body: personalInfoBody, rest: withoutPersonalInfo } = extractSection(
+  withoutExpertise,
+  /^## .*Personal Information.*$/i,
+)
 
 const TITLE_RE = /^# (.+)$/m
-const titleMatch = withoutExpertise.match(TITLE_RE)
+const titleMatch = withoutPersonalInfo.match(TITLE_RE)
 const pageTitle = titleMatch ? titleMatch[1].trim() : ''
-const bodyMarkdown = withoutExpertise.replace(TITLE_RE, '').replace(/^\s+/, '')
+const bodyMarkdown = withoutPersonalInfo.replace(TITLE_RE, '').replace(/^\s+/, '')
 
 const heroQuote = extractBlockquote(philosophyBody)
 const expertiseAreas = parseExpertiseAreas(expertiseBody)
 const profileStats = computeProfileStats(profileMarkdown)
+const personalInfo = parsePersonalInfo(personalInfoBody)
+const cardholderName = getFieldValue(personalInfo, 'Full Name')
+const idNumber = generateIdNumber(cardholderName || pageTitle)
 
 const EXPERTISE_ICONS = [FiCpu, FiShield, FiWifi]
 
@@ -221,6 +269,132 @@ function Hero() {
           ))}
         </div>
       </div>
+    </section>
+  )
+}
+
+function useTiltEffect() {
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [10, -10]), {
+    stiffness: 220,
+    damping: 20,
+  })
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-10, 10]), {
+    stiffness: 220,
+    damping: 20,
+  })
+
+  function onMouseMove(event: MouseEvent<HTMLDivElement>) {
+    const rect = event.currentTarget.getBoundingClientRect()
+    x.set((event.clientX - rect.left) / rect.width - 0.5)
+    y.set((event.clientY - rect.top) / rect.height - 0.5)
+  }
+
+  function onMouseLeave() {
+    x.set(0)
+    y.set(0)
+  }
+
+  return { rotateX, rotateY, onMouseMove, onMouseLeave }
+}
+
+function IdentityCard() {
+  const { rotateX, rotateY, onMouseMove, onMouseLeave } = useTiltEffect()
+
+  if (personalInfo.length === 0) return null
+
+  const location = getFieldValue(personalInfo, 'Location')
+  const phone = getFieldValue(personalInfo, 'Phone')
+  const email = getFieldValue(personalInfo, 'Email')
+
+  return (
+    <section className="mb-10" style={{ perspective: 1200 }}>
+      <motion.div
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
+        style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+        animate={{ boxShadow: '0px 8px 20px -8px rgba(0,0,0,0.4)' }}
+        whileHover={{ scale: 1.015, boxShadow: '0px 30px 50px -15px rgba(0,0,0,0.55)' }}
+        transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+        className="relative overflow-hidden rounded-xl border border-[var(--panel-border)] bg-[var(--panel-bg)] p-5 sm:p-6"
+      >
+        <div className="mb-5 flex items-center justify-between">
+          <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--fg-faint)]">
+            <FiCreditCard className="h-3.5 w-3.5" />
+            System Access Card
+          </div>
+          <div className="flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-widest text-[var(--fg-dim)]">
+            <motion.span
+              animate={{ opacity: [1, 0.3, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              className="h-1.5 w-1.5 rounded-full bg-[var(--fg-strong)]"
+            />
+            Verified
+          </div>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-[auto_1fr] sm:items-center">
+          <div className="relative mx-auto h-24 w-24 shrink-0 sm:mx-0">
+            <img
+              src="/20251231_135847.jpg"
+              alt={cardholderName || 'Identity photo'}
+              className="h-full w-full rounded-md object-cover grayscale contrast-125"
+            />
+            <CornerBrackets />
+          </div>
+
+          <div>
+            <p className="font-mono text-lg font-bold uppercase tracking-wide text-[var(--fg-strong)] sm:text-xl">
+              {cardholderName}
+            </p>
+            <p className="mb-4 font-mono text-[10px] uppercase tracking-widest text-[var(--fg-faint)]">
+              ID {idNumber}
+            </p>
+
+            <div className="grid gap-2.5">
+              {location && (
+                <div className="flex items-center gap-2.5 text-sm text-[var(--fg-muted)]">
+                  <FiMapPin className="h-3.5 w-3.5 shrink-0 text-[var(--fg-faint)]" />
+                  <span>{location}</span>
+                </div>
+              )}
+              {phone && (
+                <div className="flex items-center gap-2.5 text-sm text-[var(--fg-muted)]">
+                  <FiPhone className="h-3.5 w-3.5 shrink-0 text-[var(--fg-faint)]" />
+                  <span>{phone}</span>
+                </div>
+              )}
+              {email && (
+                <a
+                  href={`mailto:${email}`}
+                  className="flex items-center gap-2.5 text-sm text-[var(--fg-muted)] hover:text-[var(--fg-strong)]"
+                >
+                  <FiMail className="h-3.5 w-3.5 shrink-0 text-[var(--fg-faint)]" />
+                  <span className="underline decoration-[var(--border-strong)] underline-offset-4">
+                    {email}
+                  </span>
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6 flex items-center justify-between border-t border-[var(--border)] pt-4">
+          <div
+            className="h-5 w-32 opacity-60"
+            style={{
+              backgroundImage:
+                'repeating-linear-gradient(90deg, var(--fg-strong) 0px, var(--fg-strong) 2px, transparent 2px, transparent 5px)',
+            }}
+          />
+          <span className="flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-widest text-[var(--fg-faint)]">
+            <FiCheckCircle className="h-3 w-3" />
+            Clearance Granted
+          </span>
+        </div>
+      </motion.div>
     </section>
   )
 }
@@ -365,6 +539,7 @@ function About() {
         </h1>
       )}
       <Hero />
+      <IdentityCard />
       <AreaCards />
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
         {bodyMarkdown}

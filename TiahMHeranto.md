@@ -1,10 +1,10 @@
-# Tiaheranto Mandaniana LALAHARIJAONA HERIARINIVO - Professional Profile
+# Tiaheranto Mandaniana (TiahM Heranto) Professional Profile
 
 ## 👤 Personal Information
 - **Full Name:** Tiaheranto Mandaniana LALAHARIJAONA HERIARINIVO
 - **Location:** 47 DF TER A Antonetibe llafy, Antananarivo, Madagascar
 - **Phone:** +261 34 91 160 56
-- **Email:** mandaniatanitaheranto@gmail.com
+- **Email:** mandanianatiaheranto@gmail.com
 
 ---
 
