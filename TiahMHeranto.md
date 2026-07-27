@@ -26,7 +26,7 @@ Master's student in Computer Science (Artificial Intelligence specialization) at
 ### ENEAM - Ivato, Antananarivo (2021)
 **Theoretical Training in Aircraft Piloting (CPL - A)**
 
-### Ny Sekolintsika – Analamahitsy, Antananarivo (2021)
+### Ny Sekolintsika – Analamahitsy, Antananarivo (2020)
 **Baccalaureate – Series C (Scientific)**
 
 ---
