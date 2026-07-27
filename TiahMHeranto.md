@@ -84,7 +84,7 @@ Master's student in Computer Science (Artificial Intelligence specialization) at
 
 ## 🏆 Awards & Recognition
 
-### Orange Ainga Data Idéathon (2024)
+### Orange Ainga Data Idéathon (july 2026)
 **Prix coup de cœur**
 - Organized by Orange Digital Center and IngeData
 - Recognition for innovative data-driven solution
