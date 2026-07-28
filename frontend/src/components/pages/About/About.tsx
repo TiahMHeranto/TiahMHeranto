@@ -374,7 +374,7 @@ function IdentityCard() {
               {email && (
                 <a
                   href={`mailto:${email}`}
-                  className="flex items-center gap-2.5 text-sm text-[var(--fg-muted)] hover:text-[var(--fg-strong)]"
+                  className="flex items-center gap-2.5 text-sm text-[var(--fg-muted)] hover:text-[var(--accent)]"
                 >
                   <FiMail className="h-3.5 w-3.5 shrink-0 text-[var(--fg-faint)]" />
                   <span className="underline decoration-[var(--border-strong)] underline-offset-4">
@@ -491,7 +491,7 @@ const components: Components = {
   a: ({ href, children }) => (
     <a
       href={href}
-      className="text-[var(--fg-strong)] underline decoration-[var(--border-strong)] underline-offset-4 hover:decoration-[var(--fg-strong)]"
+      className="text-[var(--accent)] underline decoration-[var(--border-strong)] underline-offset-4 hover:decoration-[var(--accent)]"
     >
       {children}
     </a>

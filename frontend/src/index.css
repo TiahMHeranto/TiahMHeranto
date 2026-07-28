@@ -27,6 +27,13 @@
   --btn-bg: rgba(255, 255, 255, 0.05);
   --grid-line: rgba(255, 255, 255, 0.035);
   --scanline: rgba(255, 255, 255, 0.05);
+
+  /* Accent slots: neutral in dark/light so nothing here changes existing visuals. */
+  --accent: var(--fg-strong);
+  --accent-strong: var(--fg-strong);
+  --accent-soft: var(--btn-bg);
+  --accent-2: var(--fg-dim);
+  --accent-2-soft: var(--btn-bg);
 }
 
 :root[data-theme='light'] {
@@ -52,6 +59,44 @@
   --btn-bg: rgba(0, 0, 0, 0.04);
   --grid-line: rgba(0, 0, 0, 0.05);
   --scanline: rgba(0, 0, 0, 0.05);
+
+  --accent: var(--fg-strong);
+  --accent-strong: var(--fg-strong);
+  --accent-soft: var(--btn-bg);
+  --accent-2: var(--fg-dim);
+  --accent-2-soft: var(--btn-bg);
+}
+
+:root[data-theme='windows'] {
+  color-scheme: light;
+
+  --bg: #ffffff;
+  --fg: #1a1a1a;
+  --fg-strong: #0a0a0a;
+  --fg-dim: #3a3a3a;
+  --fg-subtle: rgba(26, 26, 26, 0.55);
+  --fg-muted: rgba(26, 26, 26, 0.65);
+  --fg-faint: rgba(26, 26, 26, 0.35);
+
+  --panel-bg: #ffffff;
+  --panel-border: #d4e2f0;
+  --panel-shadow: rgba(0, 120, 212, 0.12);
+
+  --content-bg: #f7fafd;
+  --border: #d4e2f0;
+  --border-strong: #c0d0e0;
+  --border-hover: #0078d4;
+
+  --btn-bg: #f0f4f8;
+  --grid-line: rgba(0, 120, 212, 0.05);
+  --scanline: rgba(0, 120, 212, 0.05);
+
+  /* Windows 11-inspired accents: blue for links/active/interactive, pink used sparingly for decorative highlights. */
+  --accent: #0078d4;
+  --accent-strong: #106ebe;
+  --accent-soft: #e6f2ff;
+  --accent-2: #ff6b9d;
+  --accent-2-soft: #fff0f5;
 }
 
 body {

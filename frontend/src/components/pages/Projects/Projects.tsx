@@ -305,7 +305,7 @@ function ProjectCard({ project }: { project: Project }) {
             href={project.repoUrl}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-1.5 font-mono text-[11px] text-[var(--fg)] underline decoration-[var(--border-strong)] underline-offset-4 hover:decoration-[var(--fg-strong)]"
+            className="flex items-center gap-1.5 font-mono text-[11px] text-[var(--accent)] underline decoration-[var(--border-strong)] underline-offset-4 hover:decoration-[var(--accent)]"
           >
             <FiGithub className="h-3.5 w-3.5" />
             {project.repoLabel}

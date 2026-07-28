@@ -126,7 +126,7 @@ function Menu({ currentPage, onPageChange }: MenuProps) {
                       transition={{ type: 'spring', stiffness: 300, damping: 22 }}
                       className={`whitespace-nowrap font-mono uppercase tracking-widest ${
                         isActive
-                          ? 'text-xs font-bold text-[var(--fg-strong)] sm:text-base md:text-lg'
+                          ? 'text-xs font-bold text-[var(--accent)] sm:text-base md:text-lg'
                           : 'text-[10px] font-medium text-[var(--fg-muted)] sm:text-xs md:text-sm'
                       }`}
                     >
@@ -134,7 +134,7 @@ function Menu({ currentPage, onPageChange }: MenuProps) {
                     </motion.span>
 
                     {!isActive && (
-                      <span className="mt-1 h-px w-0 bg-[var(--fg-subtle)] transition-all duration-300 group-hover:w-full" />
+                      <span className="mt-1 h-px w-0 bg-[var(--accent-2)] transition-all duration-300 group-hover:w-full" />
                     )}
 
                     <AnimatePresence>
@@ -144,7 +144,7 @@ function Menu({ currentPage, onPageChange }: MenuProps) {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -4 }}
                           transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-                          className="mt-1 font-mono text-xs text-[var(--fg-dim)]"
+                          className="mt-1 font-mono text-xs text-[var(--accent-2)]"
                         >
                           ^
                         </motion.span>

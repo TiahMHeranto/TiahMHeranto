@@ -6,7 +6,9 @@ import {
   type ReactNode,
 } from 'react'
 
-export type Theme = 'light' | 'dark'
+export type Theme = 'light' | 'dark' | 'windows'
+
+const THEME_CYCLE: Theme[] = ['light', 'dark', 'windows']
 
 interface ThemeContextValue {
   theme: Theme
@@ -17,9 +19,13 @@ const ThemeContext = createContext<ThemeContextValue | null>(null)
 
 const STORAGE_KEY = 'tiahm-theme'
 
+function isTheme(value: string | null): value is Theme {
+  return value === 'light' || value === 'dark' || value === 'windows'
+}
+
 function getInitialTheme(): Theme {
   const stored = window.localStorage.getItem(STORAGE_KEY)
-  if (stored === 'light' || stored === 'dark') return stored
+  if (isTheme(stored)) return stored
   return window.matchMedia('(prefers-color-scheme: light)').matches
     ? 'light'
     : 'dark'
@@ -37,7 +43,8 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     window.localStorage.setItem(STORAGE_KEY, theme)
   }, [theme])
 
-  const toggleTheme = () => setTheme((current) => (current === 'dark' ? 'light' : 'dark'))
+  const toggleTheme = () =>
+    setTheme((current) => THEME_CYCLE[(THEME_CYCLE.indexOf(current) + 1) % THEME_CYCLE.length])
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
