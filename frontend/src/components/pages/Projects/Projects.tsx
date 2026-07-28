@@ -58,7 +58,7 @@ function parseProjectBody(body: string): Omit<Project, 'number' | 'name' | 'year
   let section: 'stack' | 'features' | 'links' | null = null
 
   for (const line of lines) {
-    if (!line || line.startsWith('```')) continue
+    if (!line || line.startsWith('```') || /^-{3,}$/.test(line)) continue
 
     if (/^\*\*Tech Stack:\*\*$/i.test(line)) {
       section = 'stack'
@@ -87,7 +87,7 @@ function parseProjectBody(body: string): Omit<Project, 'number' | 'name' | 'year
       continue
     }
 
-    if (section === 'stack' && line.startsWith('-')) {
+    if (section === 'stack' && /^-\s+\S/.test(line)) {
       const item = line.replace(/^-\s*/, '').replace(/\*\*/g, '')
       const [, afterColon] = item.split(/:\s*/)
       const values = (afterColon ?? item)
@@ -98,7 +98,7 @@ function parseProjectBody(body: string): Omit<Project, 'number' | 'name' | 'year
       continue
     }
 
-    if (section === 'features' && line.startsWith('-')) {
+    if (section === 'features' && /^-\s+\S/.test(line)) {
       featureCount += 1
       continue
     }

@@ -6,9 +6,9 @@ import {
   type ReactNode,
 } from 'react'
 
-export type Theme = 'light' | 'dark' | 'windows'
+export type Theme = 'light' | 'dark' | 'windows' | 'windows-light'
 
-const THEME_CYCLE: Theme[] = ['light', 'dark', 'windows']
+const THEME_CYCLE: Theme[] = ['windows', 'windows-light', 'dark', 'light']
 
 interface ThemeContextValue {
   theme: Theme
@@ -20,15 +20,15 @@ const ThemeContext = createContext<ThemeContextValue | null>(null)
 const STORAGE_KEY = 'tiahm-theme'
 
 function isTheme(value: string | null): value is Theme {
-  return value === 'light' || value === 'dark' || value === 'windows'
+  return (
+    value === 'light' || value === 'dark' || value === 'windows' || value === 'windows-light'
+  )
 }
 
 function getInitialTheme(): Theme {
   const stored = window.localStorage.getItem(STORAGE_KEY)
   if (isTheme(stored)) return stored
-  return window.matchMedia('(prefers-color-scheme: light)').matches
-    ? 'light'
-    : 'dark'
+  return 'windows'
 }
 
 interface ThemeProviderProps {
