@@ -27,6 +27,7 @@
   --btn-bg: rgba(255, 255, 255, 0.05);
   --grid-line: rgba(255, 255, 255, 0.035);
   --scanline: rgba(255, 255, 255, 0.05);
+  --panel-blur: none;
 
   /* Accent slots: neutral in dark/light so nothing here changes existing visuals. */
   --accent: var(--fg-strong);
@@ -59,6 +60,7 @@
   --btn-bg: rgba(0, 0, 0, 0.04);
   --grid-line: rgba(0, 0, 0, 0.05);
   --scanline: rgba(0, 0, 0, 0.05);
+  --panel-blur: none;
 
   --accent: var(--fg-strong);
   --accent-strong: var(--fg-strong);
@@ -67,36 +69,38 @@
   --accent-2-soft: var(--btn-bg);
 }
 
+/* Dark aurora / glassmorphism theme — deep gradient field with frosted glass panels. */
 :root[data-theme='windows'] {
-  color-scheme: light;
+  color-scheme: dark;
 
-  --bg: #ffffff;
-  --fg: #1a1a1a;
-  --fg-strong: #0a0a0a;
-  --fg-dim: #3a3a3a;
-  --fg-subtle: rgba(26, 26, 26, 0.55);
-  --fg-muted: rgba(26, 26, 26, 0.65);
-  --fg-faint: rgba(26, 26, 26, 0.35);
+  --bg: #0a0e1a;
+  --fg: #e7ebf5;
+  --fg-strong: #ffffff;
+  --fg-dim: rgba(255, 255, 255, 0.78);
+  --fg-subtle: rgba(255, 255, 255, 0.55);
+  --fg-muted: rgba(255, 255, 255, 0.62);
+  --fg-faint: rgba(255, 255, 255, 0.34);
 
-  --panel-bg: #ffffff;
-  --panel-border: #d4e2f0;
-  --panel-shadow: rgba(0, 120, 212, 0.12);
+  --panel-bg: rgba(255, 255, 255, 0.07);
+  --panel-border: rgba(255, 255, 255, 0.18);
+  --panel-shadow: rgba(45, 212, 191, 0.22);
 
-  --content-bg: #f7fafd;
-  --border: #d4e2f0;
-  --border-strong: #c0d0e0;
-  --border-hover: #0078d4;
+  --content-bg: rgba(255, 255, 255, 0.05);
+  --border: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.24);
+  --border-hover: #2dd4bf;
 
-  --btn-bg: #f0f4f8;
-  --grid-line: rgba(0, 120, 212, 0.05);
-  --scanline: rgba(0, 120, 212, 0.05);
+  --btn-bg: rgba(255, 255, 255, 0.08);
+  --grid-line: rgba(255, 255, 255, 0.04);
+  --scanline: rgba(255, 255, 255, 0.05);
+  --panel-blur: blur(20px);
 
-  /* Windows 11-inspired accents: blue for links/active/interactive, pink used sparingly for decorative highlights. */
-  --accent: #0078d4;
-  --accent-strong: #106ebe;
-  --accent-soft: #e6f2ff;
-  --accent-2: #ff6b9d;
-  --accent-2-soft: #fff0f5;
+  /* Aurora-poster accents: teal for links/active/interactive, warm gold used sparingly for decorative highlights. */
+  --accent: #2dd4bf;
+  --accent-strong: #5eead4;
+  --accent-soft: rgba(45, 212, 191, 0.16);
+  --accent-2: #fbbf24;
+  --accent-2-soft: rgba(251, 191, 36, 0.16);
 }
 
 body {
@@ -111,10 +115,28 @@ body {
   font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
 }
 
+/* Aurora gradient field for the windows theme, replacing the flat grid background. */
+[data-theme='windows'] body {
+  background-image:
+    radial-gradient(ellipse 60% 50% at 12% 18%, rgba(45, 212, 191, 0.32), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 88% 12%, rgba(251, 191, 36, 0.22), transparent 60%),
+    radial-gradient(ellipse 60% 55% at 82% 88%, rgba(249, 115, 22, 0.22), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 15% 92%, rgba(124, 58, 237, 0.22), transparent 60%),
+    linear-gradient(180deg, #0a0e1a, #090c16);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
 body,
 .scanlines,
 button {
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.glass-panel {
+  backdrop-filter: var(--panel-blur);
+  -webkit-backdrop-filter: var(--panel-blur);
 }
 
 .scanlines {

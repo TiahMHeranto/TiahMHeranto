@@ -240,14 +240,6 @@ function CornerBrackets() {
 function Hero() {
   return (
     <section className="mb-10 grid gap-8 border-b border-[var(--border)] pb-10 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-10">
-      <div className="relative mx-auto h-28 w-28 shrink-0 sm:mx-0 sm:h-36 sm:w-36">
-        <img
-          src="/20251231_135847.jpg"
-          alt="Tiaheranto Mandaniana Lalaharijaona Heriarinivo"
-          className="h-full w-full rounded-md object-cover grayscale contrast-125"
-        />
-        <CornerBrackets />
-      </div>
 
       <div className="grid gap-6 sm:grid-cols-2">
         <div>

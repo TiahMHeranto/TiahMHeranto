@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
-export type PageKey = 'about' | 'projects' | 'daily-assistant' | 'articles'
+export type PageKey = 'about' | 'projects' | 'daily-assistant' | 'articles' | 'contact'
 
 interface MenuItemConfig {
   key: PageKey
@@ -14,6 +14,7 @@ const MENU_ITEMS: MenuItemConfig[] = [
   { key: 'projects', label: 'Projects' },
   { key: 'daily-assistant', label: 'Daily Assistant' },
   { key: 'articles', label: 'Articles' },
+  { key: 'contact', label: 'Contact' },
 ]
 
 interface CarouselSize {
@@ -84,7 +85,7 @@ function Menu({ currentPage, onPageChange }: MenuProps) {
         <span className="hidden sm:inline">SYSTEM LAUNCHER</span>
       </div>
 
-      <div className="scanlines flex items-center gap-1.5 overflow-hidden rounded-md border border-[var(--panel-border)] bg-[var(--panel-bg)] px-1.5 py-2 shadow-[0_0_25px_var(--panel-shadow)] sm:gap-3 sm:px-3 sm:py-4">
+      <div className="scanlines glass-panel flex items-center gap-1.5 overflow-hidden rounded-md border border-[var(--panel-border)] bg-[var(--panel-bg)] px-1.5 py-2 shadow-[0_0_25px_var(--panel-shadow)] sm:gap-3 sm:px-3 sm:py-4">
         <ArrowButton direction="left" onClick={() => goTo(-1)} />
 
         <div

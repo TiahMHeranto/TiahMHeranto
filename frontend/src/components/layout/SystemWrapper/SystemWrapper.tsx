@@ -6,12 +6,14 @@ import About from '../../pages/About'
 import Projects from '../../pages/Projects'
 import DailyAssistant from '../../pages/DailyAssistant'
 import Articles from '../../pages/Articles'
+import Contact from '../../pages/Contact'
 
 const PAGES: Record<PageKey, ComponentType> = {
   about: About,
   projects: Projects,
   'daily-assistant': DailyAssistant,
   articles: Articles,
+  contact: Contact,
 }
 
 interface Origin {
@@ -57,7 +59,7 @@ function SystemWrapper() {
               animate={{ scale: 1, opacity: 1, x: 0, y: 0 }}
               exit={{ scale: 0, opacity: 0, x: origin.x, y: origin.y }}
               transition={{ type: 'spring', stiffness: 260, damping: 24 }}
-              className="rounded-lg border border-[var(--border)] bg-[var(--content-bg)] p-5 sm:p-8 md:p-10"
+              className="glass-panel rounded-lg border border-[var(--border)] bg-[var(--content-bg)] p-5 sm:p-8 md:p-10"
             >
               <ActivePage />
             </motion.div>
