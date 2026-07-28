@@ -173,6 +173,30 @@ backend/
 
 ---
 
+## 🧩 Collaborative Projects
+
+### 6. NovaPedia (2026)
+**Collaborative Encyclopedia Web Application - Team Project (6 members)**
+
+A three-tier collaborative encyclopedia web application offering a distinct reading experience per audience: Enfant (simplified content + interactive puzzle), Explorateur (detailed content + quiz), and Chercheur (full article-style pages with edit/delete entry points). Built with a crew of six, split across an independent React frontend and FastAPI backend.
+
+**Tech Stack:**
+- Frontend: React 19, TypeScript, Vite, TanStack Router, Tailwind CSS, Radix UI
+- Backend: FastAPI, SQLAlchemy, PostgreSQL, JWT (python-jose), Argon2 password hashing
+
+**Key Features:**
+- ✅ Category-based encyclopedia navigation (enfant, explorateur, chercheur)
+- ✅ Dynamic article pages by URL slug
+- ✅ Text-to-speech buttons in several content areas
+- ✅ Interactive puzzle mode for children
+- ✅ Quiz mode for explorers
+- ✅ Researcher-style full article view with edit/delete entry points
+- ✅ Login/Register UI flow on the frontend
+- ✅ Backend JWT auth endpoints (register, login)
+- ✅ Backend CRUD for categories and articles
+
+---
+
 ## 🛠️ Technical Competencies Demonstrated
 
 ### Backend Development

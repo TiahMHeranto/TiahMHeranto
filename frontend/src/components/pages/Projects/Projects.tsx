@@ -130,7 +130,15 @@ function parseProjects(source: string): Project[] {
     .filter((entry): entry is { index: number; match: RegExpMatchArray } => entry.match !== null)
 
   return headings.map(({ index, match }, i) => {
-    const bodyEnd = i + 1 < headings.length ? headings[i + 1].index : lines.length
+    let bodyEnd = i + 1 < headings.length ? headings[i + 1].index : lines.length
+
+    for (let lineIndex = index + 1; lineIndex < bodyEnd; lineIndex++) {
+      if (/^## /.test(lines[lineIndex])) {
+        bodyEnd = lineIndex
+        break
+      }
+    }
+
     const body = lines.slice(index + 1, bodyEnd).join('\n')
 
     return {
