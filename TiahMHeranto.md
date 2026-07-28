@@ -54,6 +54,11 @@ Master's student in Computer Science (Artificial Intelligence specialization) at
 - **Databases:** MySQL
 - **Security Tools:** Kali Linux, Tails
 
+### AI & Machine Learning
+- Model Fine-Tuning
+- Prompt Engineering & Optimization
+- RAG (Retrieval-Augmented Generation)
+
 ---
 
 ## 💼 Professional Experience
@@ -122,7 +127,7 @@ Master's student in Computer Science (Artificial Intelligence specialization) at
 
 ## 🎯 Professional Philosophy
 
-> "Protecting a system means protecting what it produces: data. Today, I combine these two perspectives to build intelligent, resilient, and decision-oriented infrastructures."
+> "Protecting a system means protecting what it produces: data.   Today, I combine these two perspectives to build intelligent, resilient, and decision-oriented infrastructures."
 
 ---
 
