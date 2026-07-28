@@ -103,6 +103,40 @@
   --accent-2-soft: rgba(251, 191, 36, 0.16);
 }
 
+/* Light aurora / glassmorphism theme — same teal/gold identity as windows, on a light glass field. */
+:root[data-theme='windows-light'] {
+  color-scheme: light;
+
+  --bg: #f4f7fa;
+  --fg: #1a1d24;
+  --fg-strong: #05070a;
+  --fg-dim: rgba(5, 7, 10, 0.75);
+  --fg-subtle: rgba(5, 7, 10, 0.55);
+  --fg-muted: rgba(5, 7, 10, 0.62);
+  --fg-faint: rgba(5, 7, 10, 0.36);
+
+  --panel-bg: rgba(255, 255, 255, 0.6);
+  --panel-border: rgba(5, 7, 10, 0.12);
+  --panel-shadow: rgba(13, 148, 136, 0.16);
+
+  --content-bg: rgba(255, 255, 255, 0.5);
+  --border: rgba(5, 7, 10, 0.1);
+  --border-strong: rgba(5, 7, 10, 0.2);
+  --border-hover: #0d9488;
+
+  --btn-bg: rgba(255, 255, 255, 0.5);
+  --grid-line: rgba(13, 148, 136, 0.06);
+  --scanline: rgba(5, 7, 10, 0.04);
+  --panel-blur: blur(20px);
+
+  /* Same aurora identity as the dark windows theme, deepened for contrast against a light field. */
+  --accent: #0d9488;
+  --accent-strong: #0f766e;
+  --accent-soft: rgba(13, 148, 136, 0.12);
+  --accent-2: #b45309;
+  --accent-2-soft: rgba(180, 83, 9, 0.12);
+}
+
 body {
   margin: 0;
   min-height: 100svh;
@@ -123,6 +157,19 @@ body {
     radial-gradient(ellipse 60% 55% at 82% 88%, rgba(249, 115, 22, 0.22), transparent 60%),
     radial-gradient(ellipse 70% 60% at 15% 92%, rgba(124, 58, 237, 0.22), transparent 60%),
     linear-gradient(180deg, #0a0e1a, #090c16);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Same aurora field as windows, washed out for a light backdrop. */
+[data-theme='windows-light'] body {
+  background-image:
+    radial-gradient(ellipse 60% 50% at 12% 18%, rgba(45, 212, 191, 0.16), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 88% 12%, rgba(251, 191, 36, 0.14), transparent 60%),
+    radial-gradient(ellipse 60% 55% at 82% 88%, rgba(249, 115, 22, 0.12), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 15% 92%, rgba(124, 58, 237, 0.12), transparent 60%),
+    linear-gradient(180deg, #f4f7fa, #eef1f6);
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;

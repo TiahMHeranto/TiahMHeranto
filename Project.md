@@ -8,7 +8,7 @@ This document provides a comprehensive overview of all professional and personal
 
 ## 🏆 Award-Winning Project
 
-### Orange Ainga Data Idéathon (2024)
+### Orange Ainga Data Idéathon (2026)
 **Prix coup de cœur - Orange Digital Center & IngeData**
 
 - Innovative data-driven solution recognized for excellence
