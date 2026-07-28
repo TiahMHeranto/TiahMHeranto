@@ -10,7 +10,7 @@ const PHONE_DISPLAY = '+261 34 91 160 56'
 const WHATSAPP_NUMBER = PHONE_DISPLAY.replace(/\D/g, '')
 
 // Pending: no LinkedIn URL exists yet in the project's profile data.
-const LINKEDIN_URL: string = ''
+const LINKEDIN_URL: string = 'https://linkedin.com/in/mandaniaina-tiaheranto-b9a38b393'
 
 interface ContactChannel {
   key: string
