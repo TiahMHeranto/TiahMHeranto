@@ -5,13 +5,13 @@ import ThemeToggle from '../ThemeToggle'
 import About from '../../pages/About'
 import Projects from '../../pages/Projects'
 import DailyAssistant from '../../pages/DailyAssistant'
-import AddNew from '../../pages/AddNew'
+import Articles from '../../pages/Articles'
 
 const PAGES: Record<PageKey, ComponentType> = {
   about: About,
   projects: Projects,
   'daily-assistant': DailyAssistant,
-  'add-new': AddNew,
+  articles: Articles,
 }
 
 interface Origin {

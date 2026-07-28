@@ -1,0 +1,12 @@
+[
+  {
+    "id": "building-this-portfolio",
+    "title": "Building This Portfolio",
+    "date": "2026-07-28",
+    "location": "Antananarivo, Madagascar",
+    "source": "Personal Project",
+    "writer": "Tiaheranto Mandaniana LALAHARIJAONA HERIARINIVO",
+    "photos": ["/logo.png"],
+    "body": "This is the first entry in the log — a portfolio built as a system launcher rather than a traditional resume site: a horizontal HUD carousel for navigation, pages that pop straight out of the button you click, and three themes (dark, light, and a Windows 11-flavored one with blue and pink accents) that swap without touching a single component's code.\n\nEverything on the About and Projects pages is sourced live from plain Markdown files at the repo root instead of being hardcoded into components, so updating a resume detail or shipping a new project is a one-line edit away from showing up here. Daiky, the assistant page, wires up chat, voice input, and file staging entirely client-side — no model or backend behind it yet, that comes next.\n\nThis Articles page is the newest addition: a JSON-driven log for anything worth writing down — projects shipped, events attended, sketches finished, or tech worth raving about. Adding a new one is just a new entry in a JSON file, photos and all."
+  }
+]

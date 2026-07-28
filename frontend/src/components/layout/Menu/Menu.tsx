@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
-export type PageKey = 'about' | 'projects' | 'daily-assistant' | 'add-new'
+export type PageKey = 'about' | 'projects' | 'daily-assistant' | 'articles'
 
 interface MenuItemConfig {
   key: PageKey
@@ -13,7 +13,7 @@ const MENU_ITEMS: MenuItemConfig[] = [
   { key: 'about', label: 'About' },
   { key: 'projects', label: 'Projects' },
   { key: 'daily-assistant', label: 'Daily Assistant' },
-  { key: 'add-new', label: 'Add New' },
+  { key: 'articles', label: 'Articles' },
 ]
 
 interface CarouselSize {
