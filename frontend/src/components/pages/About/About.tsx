@@ -240,14 +240,6 @@ function CornerBrackets() {
 function Hero() {
   return (
     <section className="mb-10 grid gap-8 border-b border-[var(--border)] pb-10 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-10">
-      <div className="relative mx-auto h-28 w-28 shrink-0 sm:mx-0 sm:h-36 sm:w-36">
-        <img
-          src="/20251231_135847.jpg"
-          alt="Tiaheranto Mandaniana Lalaharijaona Heriarinivo"
-          className="h-full w-full rounded-md object-cover grayscale contrast-125"
-        />
-        <CornerBrackets />
-      </div>
 
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
@@ -374,7 +366,7 @@ function IdentityCard() {
               {email && (
                 <a
                   href={`mailto:${email}`}
-                  className="flex items-center gap-2.5 text-sm text-[var(--fg-muted)] hover:text-[var(--fg-strong)]"
+                  className="flex items-center gap-2.5 text-sm text-[var(--fg-muted)] hover:text-[var(--accent)]"
                 >
                   <FiMail className="h-3.5 w-3.5 shrink-0 text-[var(--fg-faint)]" />
                   <span className="underline decoration-[var(--border-strong)] underline-offset-4">
@@ -491,7 +483,7 @@ const components: Components = {
   a: ({ href, children }) => (
     <a
       href={href}
-      className="text-[var(--fg-strong)] underline decoration-[var(--border-strong)] underline-offset-4 hover:decoration-[var(--fg-strong)]"
+      className="text-[var(--accent)] underline decoration-[var(--border-strong)] underline-offset-4 hover:decoration-[var(--accent)]"
     >
       {children}
     </a>

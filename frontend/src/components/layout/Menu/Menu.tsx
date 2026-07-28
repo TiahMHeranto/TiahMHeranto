@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
-export type PageKey = 'about' | 'projects' | 'daily-assistant' | 'add-new'
+export type PageKey = 'about' | 'projects' | 'daily-assistant' | 'articles' | 'contact'
 
 interface MenuItemConfig {
   key: PageKey
@@ -13,7 +13,8 @@ const MENU_ITEMS: MenuItemConfig[] = [
   { key: 'about', label: 'About' },
   { key: 'projects', label: 'Projects' },
   { key: 'daily-assistant', label: 'Daily Assistant' },
-  { key: 'add-new', label: 'Add New' },
+  { key: 'articles', label: 'Articles' },
+  { key: 'contact', label: 'Contact' },
 ]
 
 interface CarouselSize {
@@ -84,7 +85,7 @@ function Menu({ currentPage, onPageChange }: MenuProps) {
         <span className="hidden sm:inline">SYSTEM LAUNCHER</span>
       </div>
 
-      <div className="scanlines flex items-center gap-1.5 overflow-hidden rounded-md border border-[var(--panel-border)] bg-[var(--panel-bg)] px-1.5 py-2 shadow-[0_0_25px_var(--panel-shadow)] sm:gap-3 sm:px-3 sm:py-4">
+      <div className="scanlines glass-panel flex items-center gap-1.5 overflow-hidden rounded-md border border-[var(--panel-border)] bg-[var(--panel-bg)] px-1.5 py-2 shadow-[0_0_25px_var(--panel-shadow)] sm:gap-3 sm:px-3 sm:py-4">
         <ArrowButton direction="left" onClick={() => goTo(-1)} />
 
         <div
@@ -126,7 +127,7 @@ function Menu({ currentPage, onPageChange }: MenuProps) {
                       transition={{ type: 'spring', stiffness: 300, damping: 22 }}
                       className={`whitespace-nowrap font-mono uppercase tracking-widest ${
                         isActive
-                          ? 'text-xs font-bold text-[var(--fg-strong)] sm:text-base md:text-lg'
+                          ? 'text-xs font-bold text-[var(--accent)] sm:text-base md:text-lg'
                           : 'text-[10px] font-medium text-[var(--fg-muted)] sm:text-xs md:text-sm'
                       }`}
                     >
@@ -134,7 +135,7 @@ function Menu({ currentPage, onPageChange }: MenuProps) {
                     </motion.span>
 
                     {!isActive && (
-                      <span className="mt-1 h-px w-0 bg-[var(--fg-subtle)] transition-all duration-300 group-hover:w-full" />
+                      <span className="mt-1 h-px w-0 bg-[var(--accent-2)] transition-all duration-300 group-hover:w-full" />
                     )}
 
                     <AnimatePresence>
@@ -144,7 +145,7 @@ function Menu({ currentPage, onPageChange }: MenuProps) {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -4 }}
                           transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-                          className="mt-1 font-mono text-xs text-[var(--fg-dim)]"
+                          className="mt-1 font-mono text-xs text-[var(--accent-2)]"
                         >
                           ^
                         </motion.span>
