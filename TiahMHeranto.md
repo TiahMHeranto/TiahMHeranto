@@ -144,7 +144,7 @@ timeline
          : Network Developer - AUXIMAD
          : Prix coup de cœur - Orange Ideathon
     2025 : Full Stack Developer - Dilann Tours
-    2026 : Master 1 - AI & Connected Objects
+    2026 : Master 1 - AI: Cyber Security & Connected Objectss
 ```
 
 ---
