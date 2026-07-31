@@ -197,6 +197,51 @@ A three-tier collaborative encyclopedia web application offering a distinct read
 
 ---
 
+## 🎮 Game & Mobile Projects
+
+### 7. Fruit Ninja TiahM (2026)
+**Personal Mobile Game - Flutter**
+
+A swipe-to-slice Fruit Ninja–style mobile game with custom-painted fruit, bombs, blade trails, and progressive difficulty. Built end-to-end in Flutter/Dart for Android (tested on physical device).
+
+**Tech Stack:**
+- Framework: Flutter
+- Language: Dart
+- Rendering: CustomPainter (fruits, bombs, particles, blade trail)
+- Game loop: Ticker-based physics engine
+- Persistence: Android SharedPreferences via MethodChannel
+- Fonts: Google Fonts (Fredoka)
+
+**Key Features:**
+- ✅ Swipe blade trail with glow effect
+- ✅ Multiple fruit types (watermelon, apple, orange, banana, kiwi, strawberry, peach)
+- ✅ Bombs that end the round if sliced
+- ✅ Three-life system (missed fruit costs a life)
+- ✅ Combo scoring for quick consecutive slices
+- ✅ Rising difficulty (faster spawns, more bombs)
+- ✅ Local high-score persistence
+- ✅ Pause / resume and game-over flow
+- ✅ Immersive portrait gameplay UI
+
+**Architecture:**
+
+```
+lib/
+  main.dart
+  screens/     # Home, Game, Game Over
+  widgets/     # HUD
+  theme/
+  game/
+    models/
+    engine/    # Physics, spawn, slice detection
+    painters/  # Fruit, bombs, particles, blade
+```
+
+**Links:**
+- Repository: https://github.com/TiahMHeranto/fruit_nija_game.git
+
+---
+
 ## 🛠️ Technical Competencies Demonstrated
 
 ### Backend Development
@@ -207,10 +252,11 @@ A three-tier collaborative encyclopedia web application offering a distinct read
 - Server-Sent Events (SSE)
 
 ### Frontend Development
-- React, React Native
-- TypeScript, JavaScript
+- React, React Native, Flutter
+- TypeScript, JavaScript, Dart
 - Tailwind CSS, CSS
 - Expo framework
+- CustomPainter / canvas game rendering
 - Responsive design
 
 ### AI & Machine Learning
@@ -250,6 +296,7 @@ gantt
     Orange Ainga Data Idéathon           :2024, 1M
     Daiky AI Assistant                   :2026, 3M
     Kaly'Tao (Gemmify)                   :2026, 1M
+    Fruit Ninja TiahM                    :2026-07, 1M
 ```
 
 ---
@@ -263,7 +310,7 @@ gantt
 | **Cybersecurity** | Intermediate | AUXIMAD, Academic |
 | **Network Admin** | Advanced | AUXIMAD, Academic |
 | **System Admin** | Advanced | Professional Experience |
-| **Mobile Dev** | Intermediate | Kaly'Tao |
+| **Mobile Dev** | Intermediate | Kaly'Tao, Fruit Ninja TiahM |
 | **DevOps** | Intermediate | Docker, VPS Management |
 
 ---
@@ -275,6 +322,7 @@ gantt
 3. **AI innovation** with local LLM deployment (Daiky)
 4. **Hackathon participation** at Gemmify Madagascar
 5. **Network security implementation** for traffic management
+6. **Mobile game development** with Flutter (Fruit Ninja TiahM)
 
 ---
 
